@@ -88,19 +88,27 @@ const BoardSpace = ({ space, players }) => {
         );
       } else if (isLeft) {
         content = (
-          <div className="flex flex-row-reverse w-full h-full items-center justify-between">
-            <div className={`w-3 h-full ml-1 shrink-0 ${colorClass}`}></div>
-            <div className="flex-1 h-full relative flex items-center justify-center">
-              <span className="text-[7px] font-bold leading-tight uppercase -rotate-90 origin-center absolute w-[60px] text-center">{space.name}</span>
+          <div className="w-full h-full relative">
+            <div className={`absolute top-0 right-0 w-3 h-full ${colorClass}`}></div>
+            <div
+              className="absolute inset-y-0 left-0 right-3 flex flex-row items-center justify-between py-1 px-0.5"
+              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+            >
+              <span className="text-[7px] font-bold leading-tight uppercase text-center">{space.name}</span>
+              <span className="text-[8px] font-semibold text-slate-500 shrink-0">€{space.price}</span>
             </div>
           </div>
         );
       } else if (isRight) {
         content = (
-          <div className="flex flex-row w-full h-full items-center justify-between">
-            <div className={`w-3 h-full mr-1 shrink-0 ${colorClass}`}></div>
-            <div className="flex-1 h-full relative flex items-center justify-center">
-              <span className="text-[7px] font-bold leading-tight uppercase rotate-90 origin-center absolute w-[60px] text-center">{space.name}</span>
+          <div className="w-full h-full relative">
+            <div className={`absolute top-0 left-0 w-3 h-full ${colorClass}`}></div>
+            <div
+              className="absolute inset-y-0 left-3 right-0 flex flex-row items-center justify-between py-1 px-0.5"
+              style={{ writingMode: 'vertical-rl' }}
+            >
+              <span className="text-[7px] font-bold leading-tight uppercase text-center">{space.name}</span>
+              <span className="text-[8px] font-semibold text-slate-500 shrink-0">€{space.price}</span>
             </div>
           </div>
         );
@@ -116,14 +124,32 @@ const BoardSpace = ({ space, players }) => {
        else if (space.type === 'utility' && space.id === 28) { icon = 'water_drop'; iconColor = 'text-blue-500'; }
        else if (space.type === 'tax') { icon = 'payments'; iconColor = 'text-slate-800'; }
 
-       let rotateClass = '';
-       if (isLeft) rotateClass = '-rotate-90';
-       if (isRight) rotateClass = 'rotate-90';
-
        content = (
-         <div className="flex flex-col items-center justify-center w-full h-full">
-           <span className={`material-symbols-outlined text-2xl ${iconColor} ${rotateClass}`}>{icon}</span>
-           {(isTop || isBottom) && <span className="text-[7px] mt-1 uppercase font-bold px-1">{space.name}</span>}
+         <div className="w-full h-full relative">
+           {(isLeft) && (
+             <div
+               className="absolute inset-0 flex flex-row items-center justify-center gap-1"
+               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+             >
+               <span className={`material-symbols-outlined text-2xl ${iconColor} rotate-90`}>{icon}</span>
+               <span className="text-[7px] uppercase font-bold px-1 text-center">{space.name}</span>
+             </div>
+           )}
+           {(isRight) && (
+             <div
+               className="absolute inset-0 flex flex-row items-center justify-center gap-1"
+               style={{ writingMode: 'vertical-rl' }}
+             >
+               <span className={`material-symbols-outlined text-2xl ${iconColor} -rotate-90`}>{icon}</span>
+               <span className="text-[7px] uppercase font-bold px-1 text-center">{space.name}</span>
+             </div>
+           )}
+           {(!isLeft && !isRight) && (
+             <div className="flex flex-col items-center justify-center w-full h-full">
+               <span className={`material-symbols-outlined text-2xl ${iconColor}`}>{icon}</span>
+               <span className="text-[7px] mt-1 uppercase font-bold px-1 text-center">{space.name}</span>
+             </div>
+           )}
          </div>
        );
     }
