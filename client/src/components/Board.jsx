@@ -88,27 +88,31 @@ const BoardSpace = ({ space, players }) => {
         );
       } else if (isLeft) {
         content = (
-          <div className="w-full h-full relative">
-            <div className={`absolute top-0 right-0 w-3 h-full ${colorClass}`}></div>
-            <div
-              className="absolute inset-y-0 left-0 right-3 flex flex-row items-center justify-between py-1 px-0.5"
-              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
-            >
-              <span className="text-[7px] font-bold leading-tight uppercase text-center">{space.name}</span>
-              <span className="text-[8px] font-semibold text-slate-500 shrink-0">€{space.price}</span>
+          <div className="w-full h-full relative flex flex-row-reverse">
+            <div className={`w-3 h-full shrink-0 ${colorClass}`}></div>
+            <div className="flex-1 flex flex-row items-center justify-between py-1 px-0.5 w-full overflow-hidden"
+                 style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+              <span className="text-[7px] font-bold leading-tight uppercase flex-1 flex items-center justify-center text-center max-h-full px-0.5">
+                {space.name}
+              </span>
+              <span className="text-[8px] font-semibold text-slate-500 shrink-0">
+                €{space.price}
+              </span>
             </div>
           </div>
         );
       } else if (isRight) {
         content = (
-          <div className="w-full h-full relative">
-            <div className={`absolute top-0 left-0 w-3 h-full ${colorClass}`}></div>
-            <div
-              className="absolute inset-y-0 left-3 right-0 flex flex-row items-center justify-between py-1 px-0.5"
-              style={{ writingMode: 'vertical-rl' }}
-            >
-              <span className="text-[7px] font-bold leading-tight uppercase text-center">{space.name}</span>
-              <span className="text-[8px] font-semibold text-slate-500 shrink-0">€{space.price}</span>
+          <div className="w-full h-full relative flex flex-row">
+            <div className={`w-3 h-full shrink-0 ${colorClass}`}></div>
+            <div className="flex-1 flex flex-row items-center justify-between py-1 px-0.5 w-full overflow-hidden"
+                 style={{ writingMode: 'vertical-rl' }}>
+              <span className="text-[7px] font-bold leading-tight uppercase flex-1 flex items-center justify-center text-center max-h-full px-0.5">
+                {space.name}
+              </span>
+              <span className="text-[8px] font-semibold text-slate-500 shrink-0">
+                €{space.price}
+              </span>
             </div>
           </div>
         );
